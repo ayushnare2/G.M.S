@@ -49,27 +49,29 @@ const Addmember = () => {
     trainerId: wantTrainerBool ? 1 : null
   };
 
-  fetch("http://127.0.0.1:5000/add_member", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.message) {
-      alert("✅ Member added successfully!");
-      console.log(data);
-    } else {
-      alert("❌ Failed to add member.");
-      console.error(data);
-    }
-  })
-  .catch(err => {
-    alert("❌ Error connecting to backend.");
-    console.error(err);
-  });
+  // fetch("http://127.0.0.1:5000/add_member", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   },
+  //   body: JSON.stringify(payload)
+  // })
+  // .then(res => res.json())
+  // .then(data => {
+  //   if (data.message) {
+  //     alert("✅ Member added successfully!");
+  //     console.log(data);
+  //   } else {
+  //     alert("❌ Failed to add member.");
+  //     console.error(data);
+  //   }
+  // })
+  // .catch(err => {
+  //   alert("❌ Error connecting to backend.");
+  //   console.error(err);
+  // });
+
+  
 };
 
   return (
