@@ -1,0 +1,140 @@
+/* Members.css */
+
+/* Container styling */
+.members-container {
+  padding: 40px;
+  background-color: #f5f6fa;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  margin: 30px auto;
+  max-width: 1200px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Title */
+.members-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2f3640;
+  font-weight: 700;
+  font-size: 28px;
+}
+
+/* Search input */
+.members-search {
+  margin-bottom: 25px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 500px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.members-search:focus {
+  outline: none;
+  border-color: #27374d;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+}
+
+/* Table styling */
+.members-table {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 16px;
+}
+
+.members-table th {
+  background-color: #27374d;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  padding: 15px 10px;
+}
+
+.members-table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 15px 10px;
+  color: #333;
+}
+
+/* Hover effect for rows */
+.members-table tbody tr:hover {
+  background-color: #f1f6ff;
+  transition: background-color 0.3s ease;
+}
+
+/* Plan status badges */
+.status-active {
+  color: #28a745;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.status-expired {
+  color: #dc3545;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* Delete button */
+.delete-btn {
+  padding: 8px 16px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* No members row */
+.text-center {
+  color: #666;
+  font-style: italic;
+  padding: 20px 0;
+  font-size: 16px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 992px) {
+  .members-table th,
+  .members-table td {
+    font-size: 15px;
+    padding: 12px 8px;
+  }
+
+  .members-search {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .members-container {
+    padding: 20px;
+  }
+
+  .members-table th,
+  .members-table td {
+    font-size: 14px;
+    padding: 10px 5px;
+  }
+
+  .delete-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
