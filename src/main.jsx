@@ -8,7 +8,7 @@ import Addmember from './pages/Addmember.jsx';
 import Addtrainer from './pages/Addtrainer.jsx';
 import Members from './pages/Members.jsx';
 import Trainers from './pages/Trainers.jsx';
-import AdminNotes from './pages/AdminNotes.jsx';
+
 
 
 
