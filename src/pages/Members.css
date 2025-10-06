@@ -3,6 +3,7 @@
 /* Container styling */
 .members-container {
   padding: 40px;
+  width: 800px;
   background-color: #f5f6fa;
   border-radius: 15px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
@@ -27,7 +28,7 @@
   border-radius: 12px;
   border: 1px solid #ccc;
   width: 100%;
-  max-width: 500px;
+  max-width: 750px;
   font-size: 18px;
   transition: all 0.3s ease;
 }

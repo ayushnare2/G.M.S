@@ -8,11 +8,12 @@ import Addmember from './pages/Addmember.jsx';
 import Addtrainer from './pages/Addtrainer.jsx';
 import Members from './pages/Members.jsx';
 import Trainers from './pages/Trainers.jsx';
-import Paymentstatus from './pages/Paymentstatus.jsx';
+import AdminNotes from './pages/AdminNotes.jsx';
 
 
 
 import {createBrowserRouter, RouterProvider } from "react-router-dom";
+import AdminNotes from './pages/AdminNotes.jsx';
 
 const router = createBrowserRouter([
   { path:'/',
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
       { path:'addtrainer', element: <Addtrainer />},
       { path:'members', element: <Members />},
       { path:'trainers', element: <Trainers />},
-      { path:'paymentstatus', element: <Paymentstatus />},
+      { path:'adminnotes', element: <AdminNotes />},
     ]
   },
 ])  

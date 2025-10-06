@@ -8,7 +8,7 @@ const Members = () => {
 
   // Dummy data — replace with backend or localStorage later
 useEffect(() => {
-  fetch("http://127.0.0.1:5000/get_members") // ask your friend for the exact GET endpoint
+  fetch("https://gymbackendnew.onrender.com/members") // ask your friend for the exact GET endpoint
     .then(res => res.json())
     .then(data => setMembers(data))
     .catch(err => {
@@ -22,28 +22,30 @@ useEffect(() => {
     return expiry >= today ? 'Active' : 'Expired';
   };
 
-//  const handleDelete = async (id) => {
-//   try {
-//     const res = await fetch(`http://127.0.0.1:5000/delete_member/${id}`, {
-//       method: "DELETE",
-//     });
-//     const result = await res.json();
+  const handleDelete = async (id) => {
+   try {
+     const res = await fetch(`https://gymbackendnew.onrender.com/members${id}`, {
+       method: "DELETE",
+     });
+     const result = await res.json();
 
-//     if (result.message) {
-//       alert("🗑️ Member deleted!");
-//       setMembers(prev => prev.filter(member => member._id !== id));
-//     } else {
-//       alert("❌ Failed to delete member.");
-//     }
-//   } catch (err) {
-//     console.error("Delete error:", err);
-//     alert("❌ Error connecting to backend.");
-//   }
-// };
+     if (result.message) {
+       alert("🗑️ Member deleted!");
+       setMembers(prev => prev.filter(member => member._id !== id));
+     } else {
+       alert("❌ Failed to delete member.");
+     }
+   } catch (err) {
+     console.error("Delete error:", err);
+     alert("❌ Error connecting to backend.");
+   }
+ };
 
   const filteredMembers = members.filter(member =>
     `${member.firstName} ${member.lastName}`.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+ 
 
   return (
     <Container className="members-container">

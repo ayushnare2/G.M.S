@@ -31,8 +31,8 @@ const Sidebar = () => {
            <i class="bi bi-person-check"></i> Trainers
         </NavLink>
 
-        <NavLink to="/paymentstatus" className={({ isActive }) => `item ${isActive ? 'active' : ''}`}>
-          <i class="bi bi-wallet2"></i> Payment Status
+        <NavLink to="/adminnotes" className={({ isActive }) => `item ${isActive ? 'active' : ''}`}>
+          <i class="bi bi-wallet2"></i> Admin Notes
         </NavLink>
     
         </div>
