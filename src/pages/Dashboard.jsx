@@ -1,5 +1,5 @@
 import React from 'react';
-import './Dashboard.css'; // Custom styles
+import './Dashboard.css'; 
 
 const Dashboard = () => {
   const stats = {

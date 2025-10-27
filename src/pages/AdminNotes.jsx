@@ -15,7 +15,7 @@ const AdminNotes = () => {
       <h2>Admin Notes</h2>
       <textarea
         className="notes-textarea"
-        placeholder="Write your workout plan, diet, split, or anything here..."
+        placeholder="Write your workout plan, diet, split, or reminders here..."
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
       />

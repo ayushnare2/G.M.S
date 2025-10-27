@@ -16,7 +16,7 @@ const Addtrainer = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('Trainer Info:', form); //backend later
+    console.log('Trainer Info:', form); 
   };
 
   return (

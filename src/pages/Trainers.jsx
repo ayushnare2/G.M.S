@@ -5,10 +5,9 @@ const Trainers = () => {
   const [trainers, setTrainers] = useState([]);
 
   useEffect(() => {
-    // 🔧 Replace with actual fetch from backend later
-    // fetch('https://your-backend-url/trainers')
-    //   .then(res => res.json())
-    //   .then(data => setTrainers(data));
+     fetch('https://your-backend-url/trainers')
+       .then(res => res.json())
+       .then(data => setTrainers(data));
 
     setTrainers([
       {
@@ -32,8 +31,7 @@ const Trainers = () => {
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this trainer?')) {
-      // 🔧 Replace with actual DELETE request later
-      // fetch(`https://your-backend-url/trainers/${id}`, { method: 'DELETE' })
+ 
 
       setTrainers(trainers.filter(trainer => trainer.id !== id));
     }

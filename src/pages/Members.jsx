@@ -6,9 +6,9 @@ const Members = () => {
   const [members, setMembers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Dummy data — replace with backend or localStorage later
+  
 useEffect(() => {
-  fetch("https://gymbackendnew.onrender.com/members") // ask your friend for the exact GET endpoint
+  fetch("https://gymbackendnew.onrender.com/members") 
     .then(res => res.json())
     .then(data => setMembers(data))
     .catch(err => {
@@ -33,11 +33,11 @@ useEffect(() => {
        alert("🗑️ Member deleted!");
        setMembers(prev => prev.filter(member => member._id !== id));
      } else {
-       alert("❌ Failed to delete member.");
+       alert(" Failed to delete member.");
      }
    } catch (err) {
      console.error("Delete error:", err);
-     alert("❌ Error connecting to backend.");
+     alert(" Error connecting to backend.");
    }
  };
 
@@ -59,7 +59,7 @@ useEffect(() => {
         className="members-search"
       />
 
-      <Table striped bordered hover responsive className="members-table">
+      <Table className="members-table">
         <thead>
           <tr>
             <th>#</th>

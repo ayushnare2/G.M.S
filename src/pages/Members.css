@@ -1,6 +1,5 @@
-/* Members.css */
 
-/* Container styling */
+
 .members-container {
   padding: 40px;
   width: 800px;
@@ -8,11 +7,10 @@
   border-radius: 15px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   margin: 30px auto;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Title */
 .members-title {
   text-align: center;
   margin-bottom: 30px;
@@ -21,7 +19,7 @@
   font-size: 28px;
 }
 
-/* Search input */
+
 .members-search {
   margin-bottom: 25px;
   padding: 12px 20px;
@@ -39,7 +37,7 @@
   box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
 }
 
-/* Table styling */
+
 .members-table {
   width: 100%;
   background-color: #fff;
@@ -66,13 +64,13 @@
   color: #333;
 }
 
-/* Hover effect for rows */
+
 .members-table tbody tr:hover {
   background-color: #f1f6ff;
   transition: background-color 0.3s ease;
 }
 
-/* Plan status badges */
+
 .status-active {
   color: #28a745;
   font-weight: 700;
@@ -85,7 +83,7 @@
   font-size: 16px;
 }
 
-/* Delete button */
+
 .delete-btn {
   padding: 8px 16px;
   background-color: #dc3545;
@@ -101,7 +99,7 @@
   background-color: #c82333;
 }
 
-/* No members row */
+
 .text-center {
   color: #666;
   font-style: italic;
@@ -109,7 +107,7 @@
   font-size: 16px;
 }
 
-/* Responsive tweaks */
+
 @media (max-width: 992px) {
   .members-table th,
   .members-table td {
