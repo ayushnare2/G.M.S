@@ -1,22 +1,49 @@
 import { useState } from 'react';
-import './Addmember.css'
+import './Addmember.css';
 
 const Addtrainer = () => {
   const [form, setForm] = useState({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     age: '',
     timing: '',
-    employmentstatus: '',
+    employment_status: '',
   });
 
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log('Trainer Info:', form); 
+
+    try {
+      const res = await fetch('https://gym-backendnew.onrender.com/api/trainers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      const result = await res.json();
+
+      if (result.message) {
+        alert(' Trainer added successfully!');
+        setForm({
+          first_name: '',
+          last_name: '',
+          age: '',
+          timing: '',
+          employment_status: '',
+        });
+      } else {
+        alert(' Failed to add trainer.');
+      }
+    } catch (err) {
+      console.error(' Error adding trainer:', err.message);
+      alert('Error connecting to backend.');
+    }
   };
 
   return (
@@ -24,10 +51,10 @@ const Addtrainer = () => {
       <h2>Add Trainer</h2>
 
       <label className='form-label'><strong>First Name:</strong></label>
-      <input className='form-intput' type="text" name="firstName" value={form.firstName} onChange={handleChange} required />
+      <input className='form-intput' type="text" name="first_name" value={form.first_name} onChange={handleChange} required />
 
       <label className='form-label'><strong>Last Name:</strong></label>
-      <input className='form-intput' type="text" name="lastName" value={form.lastName} onChange={handleChange} required />
+      <input className='form-intput' type="text" name="last_name" value={form.last_name} onChange={handleChange} required />
 
       <label className='form-label'><strong>Age:</strong></label>
       <input className='form-intput' type="number" name="age" value={form.age} onChange={handleChange} required />
@@ -35,9 +62,9 @@ const Addtrainer = () => {
       <label className='form-label'><strong>Timing:</strong></label>
       <input className='form-intput' type="text" name="timing" placeholder="e.g. 6am–10am" value={form.timing} onChange={handleChange} required />
 
-      <label className='form-label'><strong>Type:</strong></label>
-      <select className='form-intput' name="type" value={form.employmentstatus} onChange={handleChange} required>
-        <option value="">Employment Status</option>
+      <label className='form-label'><strong>Employment Status:</strong></label>
+      <select className='form-intput' name="employment_status" value={form.employment_status} onChange={handleChange} required>
+        <option value="">Select Type</option>
         <option value="Part Time">Part Time</option>
         <option value="Full Time">Full Time</option>
       </select>

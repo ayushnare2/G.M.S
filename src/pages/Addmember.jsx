@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './Addmember.css';
 
 const Addmember = () => {
   const [form, setForm] = useState({
@@ -18,7 +19,6 @@ const Addmember = () => {
     const { name, value } = e.target;
     let updatedForm = { ...form, [name]: value };
 
-    
     if (name === 'joinDate' || name === 'plan') {
       const join = new Date(name === 'joinDate' ? value : form.joinDate);
       const plan = name === 'plan' ? value : form.plan;
@@ -31,48 +31,57 @@ const Addmember = () => {
 
         const end = new Date(join);
         end.setMonth(end.getMonth() + months);
-        updatedForm.endDate = end.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+        updatedForm.endDate = end.toISOString().split('T')[0];
       }
     }
 
     setForm(updatedForm);
   };
 
-  const handleSubmit = e => {
-  e.preventDefault();
+  const handleSubmit = async e => {
+    e.preventDefault();
 
-  const wantTrainerBool = form.wantTrainer === "Yes";
+    const payload = {
+      ...form,
+      age: Number(form.age), // ensure age is a number
+      wantTrainer: form.wantTrainer === "Yes" // convert to boolean
+    };
 
-  const payload = {
-    ...form,
-    wantTrainer: wantTrainerBool,
-    trainerId: wantTrainerBool ? 1 : null
+    try {
+      const res = await fetch("https://gym-backendnew.onrender.com/api/members", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (data.message) {
+        alert("✅ Member added successfully!");
+        console.log(data);
+        setForm({
+          firstName: '',
+          lastName: '',
+          phoneNumber: '',
+          age: '',
+          gender: '',
+          plan: '',
+          wantTrainer: '',
+          paymentStatus: '',
+          joinDate: '',
+          endDate: '',
+        });
+      } else {
+        alert("❌ Failed to add member.");
+        console.error(data);
+      }
+    } catch (err) {
+      alert("Error connecting to backend.");
+      console.error(err);
+    }
   };
-
-  fetch("https://gymbackendnew.onrender.com/add_member", {
-     method: "POST",
-     headers: {
-       "Content-Type": "application/json"
-     },
-     body: JSON.stringify(payload)
-   })
-   .then(res => res.json())
-   .then(data => {
-     if (data.message) {
-       alert("✅ Member added successfully!");
-       console.log(data);
-     } else {
-       alert("❌ Failed to add member.");
-       console.error(data);
-     }
-   })
-   .catch(err => {
-     alert("Error connecting to backend.");
-     console.error(err);
-   });
-
-  
-};
 
   return (
     <form onSubmit={handleSubmit} className='form-container'>
