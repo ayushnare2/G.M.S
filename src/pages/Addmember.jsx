@@ -43,9 +43,16 @@ const Addmember = () => {
 
     const payload = {
       ...form,
-      age: Number(form.age), // ensure age is a number
-      wantTrainer: form.wantTrainer === "Yes" // convert to boolean
+      age: Number(form.age),
+      wantTrainer: form.wantTrainer === "Yes"
     };
+
+    console.log("📦 Payload being sent:", payload);
+
+    if (!payload.endDate) {
+      alert("⚠️ Please select a valid plan and join date to calculate end date.");
+      return;
+    }
 
     try {
       const res = await fetch("https://gym-backendnew.onrender.com/api/members", {
@@ -57,10 +64,10 @@ const Addmember = () => {
       });
 
       const data = await res.json();
+      console.log("✅ Backend response:", data);
 
       if (data.message) {
         alert("✅ Member added successfully!");
-        console.log(data);
         setForm({
           firstName: '',
           lastName: '',
@@ -75,11 +82,11 @@ const Addmember = () => {
         });
       } else {
         alert("❌ Failed to add member.");
-        console.error(data);
+        console.error("⚠️ Unexpected backend response:", data);
       }
     } catch (err) {
-      alert("Error connecting to backend.");
-      console.error(err);
+      alert("❌ Error connecting to backend.");
+      console.error("🚨 Fetch error:", err.message);
     }
   };
 

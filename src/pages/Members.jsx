@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Form, Container, Spinner } from 'react-bootstrap';
+import axios from 'axios';
+import { Table, Form, Container } from 'react-bootstrap';
 import './Members.css';
 
 const Members = () => {
   const [members, setMembers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://gym-backendnew.onrender.com/api/members")
-      .then(res => res.json())
-      .then(data => {
-        setMembers(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("❌ Error fetching members:", err.message);
-        setLoading(false);
-      });
+    const fetchMembers = async () => {
+      try {
+        const res = await axios.get("https://gym-backendnew.onrender.com/api/members");
+        setMembers(res.data);
+      } catch (err) {
+        console.error("❌ Error fetching members:", err.response?.data || err.message);
+      }
+    };
+
+    fetchMembers();
   }, []);
 
   const getPlanStatus = (endDate) => {
@@ -28,19 +28,16 @@ const Members = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`https://gym-backendnew.onrender.com/api/members/${id}`, {
-        method: "DELETE",
-      });
-      const result = await res.json();
-
-      if (result.message) {
+      const res = await axios.delete(`https://gym-backendnew.onrender.com/api/members/${id}`);
+      if (res.data.message) {
         alert("🗑️ Member deleted!");
         setMembers(prev => prev.filter(member => member._id !== id));
       } else {
         alert("⚠️ Failed to delete member.");
+        console.error("Delete response:", res.data);
       }
     } catch (err) {
-      console.error("❌ Delete error:", err.message);
+      console.error("❌ Delete error:", err.response?.data || err.message);
       alert("Error connecting to backend.");
     }
   };
@@ -61,51 +58,44 @@ const Members = () => {
         className="members-search"
       />
 
-      {loading ? (
-        <div className="text-center mt-4">
-          <Spinner animation="border" variant="primary" />
-          <p>Loading members...</p>
-        </div>
-      ) : (
-        <Table className="members-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Contact</th>
-              <th>Join Date</th>
-              <th>End Date</th>
-              <th>Payment Status</th>
-              <th>Plan Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredMembers.length > 0 ? (
-              filteredMembers.map((member, index) => (
-                <tr key={member._id}>
-                  <td>{index + 1}</td>
-                  <td>{member.firstName} {member.lastName}</td>
-                  <td>{member.phoneNumber || 'N/A'}</td>
-                  <td>{member.joinDate || 'N/A'}</td>
-                  <td>{member.endDate || 'N/A'}</td>
-                  <td>{member.paymentStatus || 'N/A'}</td>
-                  <td className={getPlanStatus(member.endDate) === 'Active' ? 'status-active' : 'status-expired'}>
-                    {getPlanStatus(member.endDate)}
-                  </td>
-                  <td>
-                    <button className="delete-btn" onClick={() => handleDelete(member._id)}>Delete</button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="8" className="text-center">No members found</td>
+      <Table className="members-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Join Date</th>
+            <th>End Date</th>
+            <th>Payment Status</th>
+            <th>Plan Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredMembers.length > 0 ? (
+            filteredMembers.map((member, index) => (
+              <tr key={member._id}>
+                <td>{index + 1}</td>
+                <td>{member.firstName} {member.lastName}</td>
+                <td>{member.phoneNumber || 'N/A'}</td>
+                <td>{member.joinDate || 'N/A'}</td>
+                <td>{member.endDate || 'N/A'}</td>
+                <td>{member.paymentStatus || 'N/A'}</td>
+                <td className={getPlanStatus(member.endDate) === 'Active' ? 'status-active' : 'status-expired'}>
+                  {getPlanStatus(member.endDate)}
+                </td>
+                <td>
+                  <button className="delete-btn" onClick={() => handleDelete(member._id)}>Delete</button>
+                </td>
               </tr>
-            )}
-          </tbody>
-        </Table>
-      )}
+            ))
+          ) : (
+            <tr>
+              <td colSpan="8" className="text-center">No members found</td>
+            </tr>
+          )}
+        </tbody>
+      </Table>
     </Container>
   );
 };
